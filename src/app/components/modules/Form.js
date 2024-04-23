@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import TextInput from "./TextInput";
+import Link from "next/link";
 
-function Form({ formTitle, onSubmit }) {
+function Form({ onSubmit, isSignUp }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    {
+      isSignUp && onSubmit({ email, password, confirmPassword });
+    }
     onSubmit({ email, password });
   };
 
@@ -28,7 +32,7 @@ function Form({ formTitle, onSubmit }) {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {formTitle === "Sign up" && (
+        {isSignUp && (
           <TextInput
             label="Confirm Password"
             type="password"
@@ -41,7 +45,11 @@ function Form({ formTitle, onSubmit }) {
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
         >
-          {formTitle}
+          {isSignUp ? (
+            <Link href={"/login"}>sign up</Link>
+          ) : (
+            <Link href={"/profile"}>login</Link>
+          )}
         </button>
       </form>
     </div>
