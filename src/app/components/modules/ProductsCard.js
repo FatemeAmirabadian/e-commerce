@@ -1,10 +1,16 @@
+import Image from "next/image";
+
 function ProductsCard(product) {
-
-
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg p-1 w-80">
       <div className="h-96 p-4">
-        <img className="w-3/4 h-3/4 m-auto" src={product.image} alt="Product" />
+        <Image
+          className="w-3/4 h-3/4 m-auto"
+          src={product.image}
+          alt="Product"
+          width={500}
+          height={500}
+        />
         <div className="px-1 py-4 mt-4 max-h-24 ">
           <div className="font-bold text-m mb-2 leading-5 ">
             {product.title}

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -8,6 +8,7 @@ import {
   clearCart,
 } from "../redux/slices/cartSlice";
 import { LuTrash2 } from "react-icons/lu";
+import Image from "next/image";
 
 const CartPage = () => {
   const cartItems = useSelector((state) => state.cart.items);
@@ -54,10 +55,12 @@ const CartPage = () => {
               className="max-w-2xl mx-auto rounded overflow-hidden shadow-lg p-1"
             >
               <div className="h-96 p-4 flex">
-                <img
+                <Image
                   className="w-2/4 h-2/4 m-auto"
                   src={item.product.image}
                   alt="Product"
+                  width={500}
+                  height={500}
                 />
 
                 {/* title - price - button */}
