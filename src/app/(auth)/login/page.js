@@ -15,7 +15,7 @@ const LogInPage = () => {
         <h1 className="text-2xl font-bold mb-4">Log in</h1>
         <Form onSubmit={handleSignUp} isSignUp={isSignUp} />
         <div className="mt-4 text-center">
-          Don't have an account?
+          Don&apost have an account?
           <Link href="/signup" className="text-blue-500 hover:underline pl-2">
             Sign up
           </Link>
