@@ -1,19 +1,13 @@
-'use client'
-import React, { useState } from "react";
+"use client";
 import Products from "./Products";
-import Header from "../modules/Header";
-import Footer from "../modules/Footer";
+import { useSelector } from "react-redux";
 
 function HomePage() {
-  const [searchTerm, setSearchTerm] = useState("");
-  
+  const searchTerm = useSelector((state) => state.search.term);
+
   return (
-    <div>
-      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <div className="container mx-auto p-4">
-        <Products searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      </div>
-      <Footer />
+    <div className="container mx-auto p-4">
+      <Products searchTerm={searchTerm} />
     </div>
   );
 }

@@ -1,65 +1,121 @@
 'use client'
-import { useState } from 'react';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addToCart,
+  updateQuantity,
+  removeFromCart,
+  clearCart,
+} from "../redux/slices/cartSlice";
+import { LuTrash2 } from "react-icons/lu";
 
 const CartPage = () => {
-  const [cartItems, setCartItems] = useState([
-    { id: 1, name: 'Product 1', price: 10, quantity: 2 },
-    { id: 2, name: 'Product 2', price: 20, quantity: 1 },
-  ]);
+  const cartItems = useSelector((state) => state.cart.items);
+  const total = useSelector((state) =>
+    state.cart.items.reduce(
+      (acc, item) => acc + item.product.price * item.quantity,
+      0
+    )
+  );
+  const dispatch = useDispatch();
 
-  const updateQuantity = (id, newQuantity) => {
-    const updatedCartItems = cartItems.map(item => {
-      if (item.id === id) {
-        return { ...item, quantity: newQuantity };
-      }
-      return item;
-    });
-    setCartItems(updatedCartItems);
+  const handleRemoveItem = (itemId) => {
+    dispatch(removeFromCart(itemId));
   };
 
-  const removeItem = (id) => {
-    const updatedCartItems = cartItems.filter(item => item.id !== id);
-    setCartItems(updatedCartItems);
+  const handleClearCart = () => {
+    dispatch(clearCart());
   };
 
-  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const handleUpdateQuantity = (itemId, quantity) => {
+    if (quantity < 1) {
+      quantity = 1;
+    }
+    dispatch(
+      updateQuantity({
+        id: itemId,
+        quantity: quantity,
+        price: cartItems.find((item) => item.id === itemId).product.price,
+      })
+    );
+  };
 
   return (
-    <div className="max-w-6xl container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Cart</h1>
+    <div>
       {cartItems.length === 0 ? (
-        <p className="text-gray-600">Your cart is empty</p>
+        <p className="font-bold text-xl text-center pt-40">
+          Your cart is empty!
+        </p>
       ) : (
-        <ul>
-          {cartItems.map(item => (
-            <li key={item.id} className="border-b border-gray-200 py-2">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-bold">{item.name}</p>
-                  <p className="text-sm text-gray-600">Price: ${item.price}</p>
-                </div>
-                <div className="flex items-center">
-                  <label className="mr-2">Quantity:</label>
-                  <input
-                    type="number"
-                    className="border border-gray-300 rounded-md px-2 py-1 text-sm w-16"
-                    value={item.quantity}
-                    onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
-                  />
-                  <button
-                    className="ml-2 bg-red-500 text-white px-2 py-1 rounded-md text-sm"
-                    onClick={() => removeItem(item.id)}
-                  >
-                    Remove
-                  </button>
+        <div className="py-28">
+          {cartItems.map((item) => (
+            <div
+              key={item.id}
+              className="max-w-2xl mx-auto rounded overflow-hidden shadow-lg p-1"
+            >
+              <div className="h-96 p-4 flex">
+                <img
+                  className="w-2/4 h-2/4 m-auto"
+                  src={item.product.image}
+                  alt="Product"
+                />
+
+                {/* title - price - button */}
+                <div className=" pl-1 lg:pl-10 ml-1 my-auto">
+                  <h2 className="text-md md:text-lg font-semibold">
+                    {item.product.title}
+                  </h2>
+                  <div className="pt-4 lg:pt-16">
+                    <p className="font-bold text-gray-600 text-md md:text-xl">
+                      Price: ${item.product.price}
+                    </p>
+                    <div className="flex content-center mt-2">
+                      <button
+                        onClick={() =>
+                          handleUpdateQuantity(item.id, item.quantity - 1)
+                        }
+                        className="bg-gray-200 text-gray-800 px-3 py-1 rounded-md mr-1"
+                      >
+                        -
+                      </button>
+                      <p className="border border-gray-300 rounded-md px-2 py-1 w-12 text-center">
+                        {item.quantity}
+                      </p>
+                      <button
+                        onClick={() =>
+                          handleUpdateQuantity(item.id, item.quantity + 1)
+                        }
+                        className="bg-gray-200 text-gray-800 px-3 py-1 rounded-md ml-1"
+                      >
+                        +
+                      </button>
+                      <button
+                        onClick={() => handleRemoveItem(item.id)}
+                        className="bg-red-500 text-white text-xl px-3 py-1 rounded-md ml-1"
+                      >
+                        <LuTrash2 />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </li>
+            </div>
           ))}
-        </ul>
+          <div className="max-w-xl mx-auto rounded px-5 mt-5 flex justify-between content-center text-center">
+            <h2 className="text-3xl lg:text-4xl font-semibold">
+              Total: ${total.toFixed(2)}
+            </h2>
+            <div className="my-auto">
+              <button
+                onClick={handleClearCart}
+                className="bg-gray-200 font-bold text-gray-800 py-2 rounded-md px-2"
+              >
+                Clear Cart
+              </button>
+            </div>
+          </div>
+        </div>
       )}
-      <h3 className="mt-4 text-xl font-bold">Total: ${totalPrice}</h3>
-      <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md text-sm">Checkout</button>
     </div>
   );
 };

@@ -26,10 +26,10 @@ function Products({searchTerm}) {
 
   return (
     <div>
-      <div className="text-center flex flex-wrap justify-center">
+      <div className="text-center flex flex-wrap justify-center mt-16 mb-5">
         {filteredProducts.map((product) => (
           <Link key={product.id} href={`/products/productDetails/${product.id}`}>
-            <div className="p-4 mx-auto my-2">
+            <div className="p-4 mx-auto my-3">
               <ProductsCard {...product} />
             </div>
           </Link>

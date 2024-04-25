@@ -5,7 +5,7 @@ const UserProfile = ({ user }) => {
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="md:flex">
         <div className="md:flex-shrink-0">
-          <img className="h-48 w-full object-cover md:w-48" src={user.picture} alt="User's profile" />
+          <img className="h-440 w-full object-cover md:w-48" src={user.picture} alt="User's profile" />
         </div>
         <div className="p-8">
           <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{user.name}</div>
