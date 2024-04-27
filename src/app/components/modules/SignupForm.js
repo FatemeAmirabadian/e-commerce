@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+"use client";
+import { useState } from "react";
 import TextInput from "./TextInput";
-import Link from "next/link";
 
-function Form({ onSubmit, isSignUp }) {
+function SignupForm({ onSubmit }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    {
-      isSignUp && onSubmit({ email, password, confirmPassword });
-    }
-    onSubmit({ email, password });
+    onSubmit({ email, password, confirmPassword });
   };
 
   return (
@@ -32,28 +29,22 @@ function Form({ onSubmit, isSignUp }) {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {isSignUp && (
-          <TextInput
-            label="Confirm Password"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        )}
+        <TextInput
+          label="Confirm Password"
+          type="password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors mt-5 text-center w-full"
         >
-          {isSignUp ? (
-            <Link href={"/login"}>sign up</Link>
-          ) : (
-            <Link href={"/profile"}>login</Link>
-          )}
+          Sign up
         </button>
       </form>
     </div>
   );
 }
 
-export default Form;
+export default SignupForm;
