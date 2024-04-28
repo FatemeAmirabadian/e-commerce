@@ -25,7 +25,7 @@ function UserProfilePage() {
   const handleSave = async () => {
     dispatch(loginSuccess(user));
     try {
-      const res = await fetch("/api/user", {
+      const res = await fetch("https://e-commerce-eight-sand.vercel.app/api/user", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -13,7 +13,7 @@ const LogInPage = () => {
   const handleLogin = async (formData) => {
     const { email, password } = formData;
     try {
-      const res = await fetch("/api/login", {
+      const res = await fetch("https://e-commerce-eight-sand.vercel.app/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -21,7 +21,7 @@ const LogInPage = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      const getInfo = await fetch("/api/user/info", {
+      const getInfo = await fetch("https://e-commerce-eight-sand.vercel.app/api/user/info", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

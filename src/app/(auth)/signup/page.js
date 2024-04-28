@@ -42,7 +42,7 @@ const SignUpPage = () => {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       
-      const res = await fetch("/api/user", {
+      const res = await fetch("https://e-commerce-eight-sand.vercel.app/api/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
