@@ -42,7 +42,7 @@ const Header = ({ searchTerm }) => {
               <Link href={"/cart"}>Cart</Link>
             </button>
             <button className="bg-white text-blue-500 px-4 py-1 rounded-md">
-              <Link href={"/login"}>Checkout</Link>
+              <Link href={"/profile"}>Profile</Link>
             </button>
           </div>
         </div>

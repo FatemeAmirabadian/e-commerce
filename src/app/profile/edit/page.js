@@ -40,11 +40,10 @@ function UserProfilePage() {
     }
     router.push("/profile");
   };
-  
 
   return (
-    <div className="bg-gray-200 min-h-screen flex items-center justify-center text-center">
-      <div className="bg-white p-2 w-3/4 sm:w-1/2 rounded">
+    <div className="bg-gray-200 min-h-screen flex items-center justify-center">
+      <div className="bg-white p-2 sm:p-5 w-3/4 sm:w-1/2 rounded">
         <div>
           <label
             className="text-sm sm:text-md font-medium mr-2"

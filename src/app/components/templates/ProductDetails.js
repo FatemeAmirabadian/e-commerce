@@ -15,7 +15,7 @@ async function ProductDetails({ id }) {
           <Image
             src={product.image}
             alt={product.title}
-            className="w-1/2 h-1/2 m-auto md:h-full md:w-full object-cover rounded-lg"
+            className="w-1/2 h-1/2 m-auto md:h-3/4 md:w-3/4 object-cover rounded-lg"
             width={500}
             height={500}
           />
@@ -33,8 +33,8 @@ async function ProductDetails({ id }) {
               {product.category}
             </span>
           </div>
-          <div className="flex items-center">
-            <span className="text-gray-800 mr-2">
+          <div className="flex items-center mb-5">
+            <span className="text-sm text-gray-800 mr-2">
               Rating: {product.rating.rate} ({product.rating.count} reviews)
             </span>
             <div className="flex items-center ">
