@@ -3,12 +3,15 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { HiOutlineLogout } from "react-icons/hi";
 import { logout } from "../../redux/slices/userSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserProfile = () => {
   const userInfo = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logout(userInfo));
+    toast.success("Logout successful");
   };
 
   return (
