@@ -25,7 +25,7 @@ function UserProfilePage() {
   const handleSave = async () => {
     dispatch(loginSuccess(user));
     try {
-      const res = await fetch("http://localhost:3000/api/user", {
+      const res = await fetch("/api/user", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

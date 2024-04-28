@@ -79,24 +79,24 @@ const CartPage = () => {
                         onClick={() =>
                           handleUpdateQuantity(item.id, item.quantity - 1)
                         }
-                        className="bg-gray-200 text-gray-800 p-1 sm:p-2 rounded mr-1"
+                        className="bg-gray-200 text-gray-800 p-3 sm:p-2 rounded mr-1"
                       >
                         -
                       </button>
-                      <p className="flex items-center justify-center border border-gray-300 rounded p-2 text-center">
+                      <p className="flex items-center justify-center border border-gray-300 rounded p-3 text-center">
                         {item.quantity}
                       </p>
                       <button
                         onClick={() =>
                           handleUpdateQuantity(item.id, item.quantity + 1)
                         }
-                        className="bg-gray-200 text-gray-800 p-1 sm:p-2 rounded ml-1"
+                        className="bg-gray-200 text-gray-800 p-3 sm:p-2 rounded ml-1"
                       >
                         +
                       </button>
                       <button
                         onClick={() => handleRemoveItem(item.id)}
-                        className="bg-red-500 text-white text-xl p-1 sm:p-2 rounded ml-1"
+                        className="bg-red-500 text-white text-xl p-2 sm:p-2 rounded ml-2"
                       >
                         <LuTrash2 />
                       </button>

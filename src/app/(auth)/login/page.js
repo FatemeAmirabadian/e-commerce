@@ -13,7 +13,7 @@ const LogInPage = () => {
   const handleLogin = async (formData) => {
     const { email, password } = formData;
     try {
-      const res = await fetch("http://localhost:3000/api/login", {
+      const res = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -21,7 +21,7 @@ const LogInPage = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      const getInfo = await fetch("http://localhost:3000/api/user/info", {
+      const getInfo = await fetch("/api/user/info", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,12 +35,9 @@ const LogInPage = () => {
         toast.error("Incorrect password");
         return;
       } else if (res.status === 200) {
-        toast.success("Login successful", {
-          onClose: () => {
-            router.push("/profile");
-            dispatch(loginSuccess(userData));
-          },
-        });
+        toast.success("Login successful");
+        router.push("/profile");
+        dispatch(loginSuccess(userData));
       } else {
         toast.error("An error occurred. Please try again later.");
       }
