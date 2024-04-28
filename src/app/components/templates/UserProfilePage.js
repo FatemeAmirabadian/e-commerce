@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { HiOutlineLogout } from "react-icons/hi";
 import { logout } from "../../redux/slices/userSlice";

@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import { setSearchTerm } from "../../redux/slices/searchSlice";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
