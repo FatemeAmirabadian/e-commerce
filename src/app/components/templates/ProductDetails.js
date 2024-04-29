@@ -5,6 +5,8 @@ import Image from "next/image";
 async function ProductDetails({ id }) {
   const res = await fetch(`https://crm-pi-ten.vercel.app/api/product/${id}`, {
     method: "GET",
+    cache: "no-store",
+    headers: { "Content-Type": "application/json" },
   });
   const product = await res.json();
 
