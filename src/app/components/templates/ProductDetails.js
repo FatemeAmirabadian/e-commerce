@@ -1,14 +1,23 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import ProductDetailsButton from "../modules/ProductDetailsButton";
-import Image from "next/image";
+import fetchProductDetails from "../FetchProductDetails";
 
-async function ProductDetails({ id }) {
-  const res = await fetch(`https://crm-pi-ten.vercel.app/api/product/${id}`, {
-    method: "GET",
-    cache: "no-store",
-    headers: { "Content-Type": "application/json" },
-  });
-  const product = await res.json();
+function ProductDetails({ id }) {
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    async function getProductDetails() {
+      const productDetails = await fetchProductDetails(id);
+      setProduct(productDetails);
+    }
+
+    getProductDetails();
+  }, [id]);
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container mx-auto p-4 rounded-lg shadow-lg">
