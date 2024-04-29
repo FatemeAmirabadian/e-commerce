@@ -46,16 +46,18 @@ function ProductDetails({ id }) {
             </span>
           </div>
           <div className="flex items-center mb-5">
-            <span className="text-sm text-gray-800 mr-2">
-              Rating: {product.rating.rate} ({product.rating.count} reviews)
-            </span>
-            {/* <div className="flex items-center ">
+            {product.rating && ( // Check if product.rating exists
+              <span className="text-sm text-gray-800 mr-2">
+                Rating: {product.rating.rate} ({product.rating.count} reviews)
+              </span>
+            )}
+            <div className="flex items-center ">
               {[...Array(5)].map((_, index) => (
                 <svg
                   key={index}
                   xmlns="http://www.w3.org/2000/svg"
                   className={`h-5 w-5 fill-current ${
-                    index < product.rating.rate
+                    index < (product.rating ? product.rating.rate : 0) // Check if product.rating exists before accessing rate
                       ? "text-yellow-500"
                       : "text-gray-300"
                   }`}
@@ -65,7 +67,7 @@ function ProductDetails({ id }) {
                   <path d="M10 1l2.56 5.72 6.44.66-4.68 4.41 1.39 6.55-6.12-3.94-6.12 3.94 1.39-6.55-4.68-4.41 6.44-.66z" />
                 </svg>
               ))}
-            </div> */}
+            </div>
           </div>
           <ProductDetailsButton id={id} product={product} />
         </div>
