@@ -1,30 +1,20 @@
+'use client'
 import React, { useState, useEffect } from "react";
 import ProductsCard from "../modules/ProductsCard";
 import Link from "next/link";
+import fetchProducts from "../FetchProducts";
 
 function Products({ searchTerm }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const res = await fetch("https://crm-pi-ten.vercel.app/api/product", {
-          method: "GET",
-          cache: "no-store",
-          headers: { "Content-Type": "application/json" },
-        });
-        if (!res.ok) {
-          throw new Error("Failed to fetch products");
-        }
-        const productsData = await res.json();
-        setProducts(productsData.data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
+    async function fetchData() {
+      const productsData = await fetchProducts();
+      setProducts(productsData);
     }
 
-    fetchProducts();
+    fetchData();
   }, []);
 
   useEffect(() => {
