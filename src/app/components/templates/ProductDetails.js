@@ -3,7 +3,7 @@ import ProductDetailsButton from "../modules/ProductDetailsButton";
 import Image from "next/image";
 
 async function ProductDetails({ id }) {
-  const res = await fetch(`https://fakestoreapi.com/products/${id}`, {
+  const res = await fetch(`https://crm-pi-ten.vercel.app/api/product/${id}`, {
     method: "GET",
   });
   const product = await res.json();
