@@ -1,9 +1,9 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import ProductsCard from "../modules/ProductsCard";
 import Link from "next/link";
 
 function Products({ searchTerm }) {
+  const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
@@ -14,11 +14,11 @@ function Products({ searchTerm }) {
           cache: "no-store",
           headers: { "Content-Type": "application/json" },
         });
-        // if (!res.ok) {
-        //   throw new Error("Failed to fetch products");
-        // }
-        const products = await res.json();
-        setFilteredProducts(products.data);
+        if (!res.ok) {
+          throw new Error("Failed to fetch products");
+        }
+        const productsData = await res.json();
+        setProducts(productsData.data);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -28,11 +28,11 @@ function Products({ searchTerm }) {
   }, []);
 
   useEffect(() => {
-    const filtered = filteredProducts.filter((product) =>
+    const filtered = products.filter((product) =>
       product.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredProducts(filtered);
-  }, [searchTerm, filteredProducts]);
+  }, [searchTerm, products]);
 
   return (
     <div>
