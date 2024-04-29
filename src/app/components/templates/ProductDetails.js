@@ -1,11 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import ProductDetailsButton from "../modules/ProductDetailsButton";
+import Image from "next/image";
 import fetchProductDetails from "../FetchProductDetails";
 
 function ProductDetails({ id }) {
   const [product, setProduct] = useState(null);
-
+  
   useEffect(() => {
     async function getProductDetails() {
       const productDetails = await fetchProductDetails(id);
